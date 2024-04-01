@@ -3,8 +3,12 @@ from django.shortcuts import render
 
 
 def home_view(request):
-    return HttpResponse("Hello, World!")
+    return render(request, "website/index.html")
 
 
 def about_view(request):
-    return JsonResponse({"message": "Hello, World!"})
+    return render(request, "website/about.html")
+
+
+def contact_view(request):
+    return render(request, "website/contact.html")
