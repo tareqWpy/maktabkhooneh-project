@@ -6,4 +6,10 @@ from projectApp.models import Contact
 @admin.register(Contact)
 # Register your models here.
 class ContactAdmin(admin.ModelAdmin):
-    pass
+    date_hierarchy = "created_date"
+    list_display = ("name", "email", "created_date")
+    list_filter = ("email",)
+    search_fields = ("name", "message")
+
+    class Meta:
+        ordering = ["email"]
