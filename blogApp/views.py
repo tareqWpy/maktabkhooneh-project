@@ -8,8 +8,12 @@ from django.utils import timezone
 from blogApp.models import Post
 
 
-def blog_home_view(request):
+def blog_home_view(request, cat_name=None, author_username=None):
     posts = Post.objects.filter(published_date__lte=timezone.now(), status=1)
+    if cat_name is not None:
+        posts = posts.filter(category__category_name=cat_name)
+    if author_username is not None:
+        posts = posts.filter(author__username=author_username)
     context = {"posts": posts}
     return render(request, "blog/blog-home.html", context)
 
@@ -54,10 +58,3 @@ def blog_single_view(request, pid):
 
     counted_view(request, post)
     return render(request, "blog/blog-single.html", context)
-
-
-def blog_category_view(request, cat_name):
-    posts = Post.objects.filter(published_date__lte=timezone.now(), status=1)
-    posts = posts.filter(category__category_name=cat_name)
-    context = {"posts": posts}
-    return render(request, "blog/blog-home.html", context)
