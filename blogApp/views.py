@@ -1,4 +1,5 @@
 from datetime import datetime
+from unicodedata import category
 
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
@@ -53,3 +54,10 @@ def blog_single_view(request, pid):
 
     counted_view(request, post)
     return render(request, "blog/blog-single.html", context)
+
+
+def blog_category_view(request, cat_name):
+    posts = Post.objects.filter(published_date__lte=timezone.now(), status=1)
+    posts = posts.filter(category__category_name=cat_name)
+    context = {"posts": posts}
+    return render(request, "blog/blog-home.html", context)
