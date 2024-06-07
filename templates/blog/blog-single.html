@@ -41,10 +41,12 @@
                             {% endfor %}
                         </ul>
                         <div class="user-details row">
+                            {% if author %}
                             <p class="user-name col-lg-12 col-md-12 col-6">
-                                <a href="#">{{current_post.author.get_full_name}}</a>
+                                <a href="{% url 'blog:blog-author' author_username=author %}">{{author.get_full_name}}</a>
                                 <span class="lnr lnr-user"></span>
                             </p>
+                            {% endif %}
                             <p class="date col-lg-12 col-md-12 col-6">
                                 <a href="#"
                                     >{{current_post.published_date|date:"d F Y"}}

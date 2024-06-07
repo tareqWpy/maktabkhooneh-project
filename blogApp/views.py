@@ -51,6 +51,7 @@ def blog_single_view(request, pid):
     )
 
     context = {
+        "author": post.author,
         "current_post": post,
         "prev_post": prev_post,
         "next_post": next_post,
