@@ -2,10 +2,14 @@
 
 <div class="widget-wrap">
     <div class="single-sidebar-widget search-widget">
-        <form class="search-form" action="#">
+        <form
+            class="search-form"
+            action="{% url 'blog:blog-search' %}"
+            method="GET"
+        >
             <input
                 placeholder="Search Posts"
-                name="search"
+                name="s"
                 type="text"
                 onfocus="this.placeholder = ''"
                 onblur="this.placeholder = 'Search Posts'"
