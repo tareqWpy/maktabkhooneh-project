@@ -10,7 +10,7 @@ register = template.Library()
 def latest_post():
     posts = Post.objects.filter(status=1, published_date__lte=timezone.now()).order_by(
         "-published_date"
-    )[:3]
+    )[:4]
     return {"posts": posts}
 
 
