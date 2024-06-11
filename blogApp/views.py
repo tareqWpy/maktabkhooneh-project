@@ -7,14 +7,17 @@ from django.utils import timezone
 from blogApp.models import Post
 
 
-def blog_home_view(request, cat_name=None, author_username=None):
+def blog_home_view(request, **kwargs):
     posts = Post.objects.filter(published_date__lte=timezone.now(), status=1)
-    if cat_name is not None:
-        posts = posts.filter(category__category_name=cat_name)
-    if author_username is not None:
-        posts = posts.filter(author__username=author_username)
+    if kwargs.get("cat_name") is not None:
+        posts = posts.filter(category__category_name=kwargs["cat_name"])
+    if kwargs.get("author_username") is not None:
+        posts = posts.filter(author__username=kwargs["author_username"])
+    if kwargs.get("tag_name") is not None:
+        posts = posts.filter(tags__name__in=[kwargs["tag_name"]])
 
-    posts = Paginator(posts, 4)
+    posts = Paginator(list(posts), 4)
+
     try:
         page_number = request.GET.get("page")
         posts = posts.get_page(page_number)
@@ -37,6 +40,7 @@ def blog_search_view(request):
                 | Q(author__username__contains=search)
                 | Q(title__contains=search)
                 | Q(category__category_name__contains=search)
+                | Q(tags__name__contains=search)
             ).distinct()
     context = {"posts": posts}
     return render(request, "blog/blog-home.html", context)

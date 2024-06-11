@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from projectApp.models import Contact
+from projectApp.models import Contact, Newsletter
 
 
 @admin.register(Contact)
@@ -13,3 +13,6 @@ class ContactAdmin(admin.ModelAdmin):
 
     class Meta:
         ordering = ["email"]
+
+
+admin.site.register(Newsletter)

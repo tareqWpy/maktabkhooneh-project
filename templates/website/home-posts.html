@@ -1,5 +1,4 @@
-{% load static %}
-
+{% load static %} {% load humanize %}
 <section class="recent-blog-area section-gap">
     <div class="container">
         <div class="row d-flex justify-content-center">
@@ -65,7 +64,7 @@
                         >
                         <p>{{ post.content|truncatewords:10 }}</p>
                         <h6 class="date">
-                            {{post.published_date|date:"Y M D h:m"}}
+                            {{post.published_date|naturaltime}}
                         </h6>
                     </div>
                 </div>

@@ -37,9 +37,26 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # ? used apps for creating a better website:
+    "django.contrib.humanize",
+    "django_extensions",
+    "django.contrib.sites",
+    "django.contrib.sitemaps",
+    "robots",  # ! pip install django-robots
+    "debug_toolbar",  # ! pip install django-debug-toolbar
+    "taggit",  # ! pip install django-taggit
+    # ?  manualy installed apps:
     "projectApp.apps.ProjectappConfig",
     "blogApp.apps.BlogappConfig",
 ]
+
+# ? site framework
+SITE_ID = 2
+
+# ? robots
+ROBOTS_USE_HOST = False
+ROBOTS_USE_SITEMAP = False
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -49,6 +66,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # ? used apps for creating a better website:
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "mysite.urls"
@@ -129,3 +148,10 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# ? allowing the ips for django debug toolbar
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]

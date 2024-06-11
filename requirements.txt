@@ -1,6 +1,11 @@
 asgiref==3.8.1
 Django==4.2.11
+django-debug-toolbar==4.4.2
+django-extensions==3.2.3
+django-robots==6.1
+django-taggit==5.0.1
 pillow==10.3.0
+pyparsing==3.1.2
 sqlparse==0.4.4
 typing_extensions==4.10.0
 tzdata==2024.1
