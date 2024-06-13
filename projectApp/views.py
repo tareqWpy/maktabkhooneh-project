@@ -50,6 +50,10 @@ def newsletter_view(request):
         form = NewsletterForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(
+                request,
+                "Your email submited successfully!",
+            )
             return HttpResponseRedirect("/")
 
     elif request.method == "GET":

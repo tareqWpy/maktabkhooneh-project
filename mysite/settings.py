@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,7 +54,7 @@ INSTALLED_APPS = [
 ]
 
 # ? site framework
-SITE_ID = 2
+SITE_ID = 3
 
 # ? multi-captcha-admin
 MULTI_CAPTCHA_ADMIN = {
