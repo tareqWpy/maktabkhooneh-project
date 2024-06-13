@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "multi_captcha_admin",  # ! pip install django-multi-captcha-admin
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -45,18 +46,52 @@ INSTALLED_APPS = [
     "robots",  # ! pip install django-robots
     "debug_toolbar",  # ! pip install django-debug-toolbar
     "taggit",  # ! pip install django-taggit
+    "django_summernote",  # ! pip install django-summernote
+    "captcha",  # ! pip install  django-simple-captcha
     # ?  manualy installed apps:
-    "projectApp.apps.ProjectappConfig",
-    "blogApp.apps.BlogappConfig",
+    "projectApp",
+    "blogApp",
+    "accounts",
 ]
 
 # ? site framework
 SITE_ID = 2
 
+# ? multi-captcha-admin
+MULTI_CAPTCHA_ADMIN = {
+    "engine": "simple-captcha",
+}
+
 # ? robots
 ROBOTS_USE_HOST = False
 ROBOTS_USE_SITEMAP = False
 
+# ? summernote configuration
+SUMMERNOTE_THEME = "bs5"
+SUMMERNOTE_CONFIG = {
+    # Using SummernoteWidget - iframe mode, default
+    "iframe": True,
+    # You can put custom Summernote settings
+    "summernote": {
+        # As an example, using Summernote Air-mode
+        "airMode": False,
+        # Change editor size
+        "width": "1000",
+        "height": "500",
+        # Toolbar customization
+        # https://summernote.org/deep-dive/#custom-toolbar-popover
+        "toolbar": [
+            ["style", ["style"]],
+            ["font", ["bold", "underline", "clear"]],
+            ["fontname", ["fontname"]],
+            ["color", ["color"]],
+            ["para", ["ul", "ol", "paragraph"]],
+            ["table", ["table"]],
+            ["insert", ["link", "picture", "video"]],
+            ["view", ["fullscreen", "codeview", "help"]],
+        ],
+    },
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -136,13 +171,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_URL = "/static/"
+# ! this for python manage.py collecstatic
+STATIC_ROOT = BASE_DIR / "statics"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "statics",
+    BASE_DIR / "static",
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

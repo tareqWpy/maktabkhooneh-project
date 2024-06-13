@@ -45,8 +45,13 @@
           <div class="row align-items-center">
             <div class="col-lg-6 col-sm-6 col-6 header-top-left">
               <ul>
-                <li><a href="#">Visit Us</a></li>
-                <li><a href="#">Buy Tickets</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a style="font-weight:400; color: #ffffff">Logged in as {{ user.username }}</a></li>
+                <li><a href="{% url 'accounts:logout' %}" style="font-weight:400; color: #ffffff">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'accounts:login' %}" style="font-weight:400; color: #ffffff">Login</a></li>
+                <li><a href="{% url 'accounts:signup' %}" style="font-weight:400; color: #ffffff">Signup</a></li>
+                {% endif %}
               </ul>
             </div>
             <div class="col-lg-6 col-sm-6 col-6 header-top-right">
@@ -120,18 +125,14 @@
               <div class="row">
                 <div class="col">
                   <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Feature</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="{% url 'website:index'%}">Home</a></li>
+                    <li><a href="{% url 'website:about'%}">About</a></li>
                   </ul>
                 </div>
                 <div class="col">
                   <ul>
-                    <li><a href="#">Team</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{% url 'blog:blog-home'%}">Blog</a></li>
+                    <li><a href="{% url 'website:contact'%}">Contact</a></li>
                   </ul>
                 </div>
               </div>
@@ -147,7 +148,7 @@
               <div>
                 <form
                   action="{% url 'website:newsletter' %}"
-                  method="post"
+                  method="POST"
                   class="subscription relative"
                 >
                 {% csrf_token %}
@@ -163,11 +164,13 @@
                     <button type="submit" class="btn bb-btn">
                       <span class="lnr lnr-location"></span>
                     </button>
-                  </div>
-                  <div class="mt-10 info"></div>
-                </form>
-              </div>
-            </div>
+                    </div>
+                    <div class="mt-10 info"></div>
+                  <div style="position: relative">
+                </div>
+                    </form>
+                    </div>
+                </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="single-footer-widget mail-chimp">
@@ -215,7 +218,7 @@
         const popupMessage = document.getElementById('popup-message');
         setTimeout(function () {
             popupMessage.style.display = 'none';
-        }, 4000);
+        }, 6000);
     });
     </script>
     <script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>

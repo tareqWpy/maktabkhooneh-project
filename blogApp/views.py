@@ -1,10 +1,12 @@
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
-from blogApp.models import Post
+from blogApp.forms import CommentForm
+from blogApp.models import Comment, Post
 
 
 def blog_home_view(request, **kwargs):
@@ -53,9 +55,20 @@ def counted_view(request, post):
     return render(request, "blog/blog-single.html", context)
 
 
+@login_required
 def blog_single_view(request, pid):
-    post = get_object_or_404(Post, pk=pid, published_date__lte=timezone.now(), status=1)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                "Your comment submited! But it needs to be approved by admin. 🚫",
+            )
+        else:
+            messages.error(request, "Failed to submit your comment! 🚫")
 
+    post = get_object_or_404(Post, pk=pid, published_date__lte=timezone.now(), status=1)
     # Query for the next post
     next_post = (
         Post.objects.filter(
@@ -78,12 +91,20 @@ def blog_single_view(request, pid):
         .first()
     )
 
-    context = {
-        "author": post.author,
-        "current_post": post,
-        "prev_post": prev_post,
-        "next_post": next_post,
-    }
-
-    counted_view(request, post)
-    return render(request, "blog/blog-single.html", context)
+    if not post.login_required:
+        comments = Comment.objects.filter(post=post.id, approved=True).order_by(
+            "-created_date"
+        )
+        form = CommentForm()
+        context = {
+            "comment_form": form,
+            "comments": comments,
+            "author": post.author,
+            "current_post": post,
+            "prev_post": prev_post,
+            "next_post": next_post,
+        }
+        counted_view(request, post)
+        return render(request, "blog/blog-single.html", context)
+    else:
+        return redirect("accounts:login")

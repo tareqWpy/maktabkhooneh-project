@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 
 from projectApp.forms import ContactForm, NewsletterForm
@@ -18,9 +18,22 @@ def contact_view(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            cleaned_data = form.cleaned_data
-            cleaned_data["name"] = "ناشناس"
-            form = ContactForm(cleaned_data)
+            form.save()
+            messages.success(request, "Your contact has been created successfully! 🎉")
+        else:
+            messages.error(
+                request, "Failed to create a contact. Please check your input. 🚫"
+            )
+    else:
+        form = ContactForm()
+    return render(request, "website/contact.html", {"form": form})
+
+
+"""
+def contact_view(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
             form.save()
             messages.add_message(
                 request, messages.SUCCESS, "Your ticket submitted successfully!"
@@ -29,20 +42,7 @@ def contact_view(request):
             messages.add_message(request, messages.ERROR, "Your ticket did not submit!")
     form = ContactForm()
     return render(request, "website/contact.html", {"form": form})
-
-
-# def contact_view(request):
-#     if request.method == "POST":
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.add_message(
-#                 request, messages.SUCCESS, "Your ticket submitted successfully!"
-#             )
-#         else:
-#             messages.add_message(request, messages.ERROR, "Your ticket did not submit!")
-#     form = ContactForm()
-#     return render(request, "website/contact.html", {"form": form})
+"""
 
 
 def newsletter_view(request):
