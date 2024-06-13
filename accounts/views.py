@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
+
+from accounts.forms import MyUserCreationForm
 
 
 def login_view(request):
@@ -12,7 +14,6 @@ def login_view(request):
             if form.is_valid():
                 username = form.cleaned_data.get("username")
                 password = form.cleaned_data.get("password")
-                print(request.path)
                 user = authenticate(request, username=username, password=password)
                 if user is not None:
                     login(request, user)
@@ -44,7 +45,7 @@ def logout_view(request):
 def signup_view(request):
     if not request.user.is_authenticated:
         if request.method == "POST":
-            form = UserCreationForm(request.POST)
+            form = MyUserCreationForm(request.POST)
             if form.is_valid():
                 form.save()
                 return redirect("accounts:login")
@@ -52,7 +53,7 @@ def signup_view(request):
             request,
             "You signed up successfully!",
         )
-        form = UserCreationForm()
+        form = MyUserCreationForm()
         context = {"form": form}
         return render(request, "accounts/signup.html", context)
     else:

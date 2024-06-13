@@ -203,12 +203,19 @@
                             <div class="form-group col-lg-6 col-md-12 email">
                                 <input
                                     value="{{request.user.email}}"
-                                    type="email"
+                                    type="hidden"
                                     class="form-control"
                                     name="email"
                                     placeholder="Enter email address"
                                     onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = 'Enter email address'"
+                                />
+                                <input
+                                    disabled
+                                    value="{{request.user.email}}"
+                                    type="email"
+                                    class="form-control"
+                                    name="email"
                                 />
                             </div>
                         </div>
