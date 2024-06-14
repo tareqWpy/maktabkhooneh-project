@@ -9,7 +9,7 @@ SECRET_KEY = "django-insecure-6wd1ilp$u+0=9q7ndw_azwtl_5s1(0cqfzhsw-szr-oc!u8ycj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["djangotech.online", "www.djangotech.online"]
+# ALLOWED_HOSTS = ["djangotech.online", "www.djangotech.online"]
 
 
 # ? site framework
