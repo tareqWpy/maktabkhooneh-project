@@ -18,7 +18,7 @@
     <!-- meta character set -->
     <meta charset="UTF-8" />
     <!-- Site Title -->
-    <title>Travel</title>
+    <title>DjangoTech</title>
 
     <link
       href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
@@ -111,10 +111,7 @@
             <div class="single-footer-widget">
               <h6>About Agency</h6>
               <p>
-                The world has become so fast paced that people don’t want to
-                stand by reading a page of information, they would much rather
-                look at a presentation and understand the message. It has come
-                to a point
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
               </p>
             </div>
           </div>
@@ -172,7 +169,15 @@
                 </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6">
-            
+            <div class="single-footer-widget mail-chimp">
+              <h6 class="mb-20">InstaFeed</h6>
+              <ul class="instafeed d-flex flex-wrap">
+                <li><a href="{% url 'blog:blog-tags' tag_name='django' %}"><img src="{% static 'img/i1.jpg' %}" alt="" /></a></li>
+                <li><a href="{% url 'blog:blog-tags' tag_name='wordpress' %}"><img src="{% static 'img/i2.jpg' %}" alt="" /></a></li>
+                <li><a href="{% url 'blog:blog-tags' tag_name='nuxt.js' %}"><img src="{% static 'img/i3.jpg' %}" alt="" /></a></li>
+                <li><a href="{% url 'blog:blog-tags' tag_name='vue.js' %}"><img src="{% static 'img/i4.jpg' %}" alt="" /></a></li>
+              </ul>
+            </div>
           </div>
           </div>
         </div>
