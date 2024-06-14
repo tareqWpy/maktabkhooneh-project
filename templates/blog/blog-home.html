@@ -27,8 +27,9 @@
                         <a>
                             <div class="thumb">
                                 <img
+                                    style="width: 349.986px; height: 213.878px"
                                     class="content-image img-fluid d-block mx-auto"
-                                    src="{%  static 'img/blog/cat-widget1.jpg' %}"
+                                    src="{%  static 'img/blog/django.jpg' %}"
                                     alt=""
                                 />
                             </div>
@@ -36,10 +37,25 @@
                                 <h4
                                     class="content-title mx-auto text-uppercase"
                                 >
-                                    Social life
+                                    Backend
                                 </h4>
                                 <span></span>
-                                <p>Enjoy your social life together</p>
+                                <ul>
+                                    <li>
+                                        <a
+                                            href="{% url 'blog:blog-tags' tag_name='django' %}"
+                                            >django</a
+                                        >,
+                                        <a
+                                            href="{% url 'blog:blog-tags' tag_name='python' %}"
+                                            >python</a
+                                        >,
+                                        <a
+                                            href="{% url 'blog:blog-tags' tag_name='ai' %}"
+                                            >ai</a
+                                        >
+                                    </li>
+                                </ul>
                             </div>
                         </a>
                     </div>
@@ -52,8 +68,9 @@
                         <a>
                             <div class="thumb">
                                 <img
+                                    style="width: 349.986px; height: 213.878px"
                                     class="content-image img-fluid d-block mx-auto"
-                                    src="{%  static 'img/blog/cat-widget2.jpg' %}"
+                                    src="{%  static 'img/blog/wordpress.jpg' %}"
                                     alt=""
                                 />
                             </div>
@@ -61,10 +78,17 @@
                                 <h4
                                     class="content-title mx-auto text-uppercase"
                                 >
-                                    Politics
+                                    Wordpress
                                 </h4>
                                 <span></span>
-                                <p>Be a part of politics</p>
+                                <ul>
+                                    <li>
+                                        <a
+                                            href="{% url 'blog:blog-tags' tag_name='wordpress' %}"
+                                            >wordpress</a
+                                        >
+                                    </li>
+                                </ul>
                             </div>
                         </a>
                     </div>
@@ -77,8 +101,9 @@
                         <a>
                             <div class="thumb">
                                 <img
+                                    style="width: 349.986px; height: 213.878px"
                                     class="content-image img-fluid d-block mx-auto"
-                                    src="{%  static 'img/blog/cat-widget3.jpg' %}"
+                                    src="{%  static 'img/blog/vue.jpg' %}"
                                     alt=""
                                 />
                             </div>
@@ -86,10 +111,25 @@
                                 <h4
                                     class="content-title mx-auto text-uppercase"
                                 >
-                                    Food
+                                    Frontend
                                 </h4>
                                 <span></span>
-                                <p>Let the food be finished</p>
+                                <ul>
+                                    <li>
+                                        <a
+                                            href="{% url 'blog:blog-tags' tag_name='css' %}"
+                                            >css</a
+                                        >,
+                                        <a
+                                            href="{% url 'blog:blog-tags' tag_name='html' %}"
+                                            >html</a
+                                        >,
+                                        <a
+                                            href="{% url 'blog:blog-tags' tag_name='javascript' %}"
+                                            >javascript</a
+                                        >
+                                    </li>
+                                </ul>
                             </div>
                         </a>
                     </div>
