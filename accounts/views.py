@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
 
-from accounts.forms import MyUserCreationForm
+from accounts.forms import RegisterForm
 
 
 def login_view(request):
@@ -45,7 +45,7 @@ def logout_view(request):
 def signup_view(request):
     if not request.user.is_authenticated:
         if request.method == "POST":
-            form = MyUserCreationForm(request.POST)
+            form = RegisterForm(request.POST)
             if form.is_valid():
                 form.save()
                 return redirect("accounts:login")
@@ -53,7 +53,7 @@ def signup_view(request):
             request,
             "You signed up successfully!",
         )
-        form = MyUserCreationForm()
+        form = RegisterForm()
         context = {"form": form}
         return render(request, "accounts/signup.html", context)
     else:

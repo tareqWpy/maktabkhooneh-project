@@ -1,7 +1,10 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from taggit.managers import TaggableManager
+
+User = settings.AUTH_USER_MODEL
 
 
 class Category(models.Model):
@@ -14,7 +17,9 @@ class Category(models.Model):
 # Create your models here.
 class Post(models.Model):
     image = models.ImageField(upload_to="blogApp/", default="blogApp/default.jpg")
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True
+    )
     title = models.CharField(max_length=255)
     content = models.TextField()
     login_required = models.BooleanField(default=False)
