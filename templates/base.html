@@ -153,6 +153,8 @@
               alert-danger
             {% elif message.tags == 'success' %}
               alert-success
+            {% elif message.tags == 'warning' %}
+              alert-warning
             {% endif %}
             ">
             {{ message|safe }}
@@ -249,7 +251,7 @@
         const popupMessage = document.getElementById('popup-message');
         setTimeout(function () {
             popupMessage.style.display = 'none';
-        }, 6000);
+        }, 8000);
     });
     </script>
       {% compress js inline %}
