@@ -72,9 +72,9 @@
                 </div>
                 <div class="container-login100-form-btn m-t-17">
                     
-                    <div class="contact100-form-checkbox" style="display:flex; justify-content:space-between; height:32px; position:absolute; bottom: 95px; right: 60px">
+                    <div class="contact100-form-checkbox" style="display:flex; justify-content:space-between; height:33px; position:absolute; bottom: 95px; right: 70px">
                         <div
-                            class="alert-msg" style="width:100% ;border:1px solid black; border-radius:8px;"
+                            class="alert-msg" style="width:100% ;border:1px solid black; border-radius:2px;"
                             name="remember-me"
                         >{{form.captcha}}</div>
                     </div>
@@ -87,10 +87,10 @@
                 </div>
             </form>
             <br/>
-            <p>your password must be:</p>
+            {% comment %} <p>your password must be:</p>
             <small>more than 8 charecters</small><br/>
             <small>at least contain 1 upper and lower case letter</small><br/>
-            <small>contain @</small><br/>
+            <small>contain @</small><br/> {% endcomment %}
         </div>
         
     </div>
