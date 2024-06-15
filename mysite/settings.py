@@ -15,7 +15,12 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
+#         "LOCATION": "127.0.0.1:11211",
+#     }
+# }
 # Application definition
 
 INSTALLED_APPS = [
@@ -36,6 +41,7 @@ INSTALLED_APPS = [
     "taggit",  # ! pip install django-taggit
     "django_summernote",  # ! pip install django-summernote
     "captcha",  # ! pip install  django-simple-captcha
+    "compressor",  # ! pip install django_compressor
     # ?  manualy installed apps:
     "projectApp",
     "blogApp",
@@ -79,6 +85,9 @@ SUMMERNOTE_CONFIG = {
 }
 
 MIDDLEWARE = [
+    "django.middleware.gzip.GZipMiddleware",  # This one
+    "htmlmin.middleware.HtmlMinifyMiddleware",  # This one
+    "htmlmin.middleware.MarkRequestMiddleware",  # This one
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -159,6 +168,14 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    # Add this
+    "compressor.finders.CompressorFinder",
+)
+
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 AUTHENTICATION_BACKENDS = ["accounts.backends.EmailBackend"]

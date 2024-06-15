@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% load compress %}
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
   <head>
@@ -10,7 +10,7 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href="{% static 'img/fav.png' %}" />
     <!-- Author Meta -->
-    <meta name="author" content="colorlib" />
+    <meta name="author" content="taregh" />
     <!-- Meta Description -->
     <meta name="description" content="" />
     <!-- Meta Keyword -->
@@ -19,7 +19,6 @@
     <meta charset="UTF-8" />
     <!-- Site Title -->
     <title>DjangoTech</title>
-
     <link
       href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
       rel="stylesheet"
@@ -27,6 +26,7 @@
     <!--
 			CSS
 			============================================= -->
+    {% compress css inline %}
     <link rel="stylesheet" href="{% static 'css/linearicons.css' %}" />
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}" />
     <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" />
@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="{% static 'css/animate.min.css'%}" />
     <link rel="stylesheet" href="{% static 'css/owl.carousel.css'%}" />
     <link rel="stylesheet" href="{% static 'css/main.css'%}" />
-
+    {% endcompress %}
     </head>
     <body>
     <header id="header">
@@ -183,6 +183,7 @@
       </div>
     </footer>
     <!-- End footer Area -->
+     {% compress js inline %}
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const popupMessage = document.getElementById('popup-message');
@@ -205,5 +206,6 @@
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/mail-script.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    {% endcompress %}
   </body>
 </html>

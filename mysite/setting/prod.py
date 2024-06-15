@@ -7,7 +7,22 @@ from mysite.settings import *
 SECRET_KEY = "django-insecure-6wd1ilp$u+0=9q7ndw_azwtl_5s1(0cqfzhsw-szr-oc!u8ycj"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+
+COMPRESS_ENABLED = not DEBUG
+
+COMPRESS_CSS_HASHING_METHOD = "content"
+COMPRESS_FILTERS = {
+    "css": [
+        "compressor.filters.css_default.CssAbsoluteFilter",
+        "compressor.filters.cssmin.rCSSMinFilter",
+    ],
+    "js": [
+        "compressor.filters.jsmin.JSMinFilter",
+    ],
+}
+HTML_MINIFY = True
+KEEP_COMMENTS_ON_MINIFYING = True
 
 # ALLOWED_HOSTS = ["djangotech.online", "www.djangotech.online"]
 ALLOWED_HOSTS = ["127.0.0.1"]

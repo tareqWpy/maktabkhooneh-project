@@ -5,7 +5,7 @@ from projectApp.models import Contact, Newsletter
 
 
 class ContactForm(forms.ModelForm):
-    # captcha = CaptchaField()
+    captcha = CaptchaField()
 
     class Meta:
         model = Contact
