@@ -108,3 +108,7 @@ def blog_single_view(request, pid):
         return render(request, "blog/blog-single.html", context)
     else:
         return redirect("accounts:login")
+
+
+def error_404(request, exception):
+    return render(request, "error/404.html")

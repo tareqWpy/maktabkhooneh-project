@@ -7,9 +7,10 @@ from mysite.settings import *
 SECRET_KEY = "django-insecure-6wd1ilp$u+0=9q7ndw_azwtl_5s1(0cqfzhsw-szr-oc!u8ycj"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ["djangotech.online", "www.djangotech.online"]
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # ? site framework
