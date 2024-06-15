@@ -24,6 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",  # ! pip install whitenoise
     "multi_captcha_admin",  # ! pip install django-multi-captcha-admin
     "django.contrib.admin",
     "django.contrib.auth",
@@ -85,9 +86,9 @@ SUMMERNOTE_CONFIG = {
 }
 
 MIDDLEWARE = [
-    "django.middleware.gzip.GZipMiddleware",  # This one
-    "htmlmin.middleware.HtmlMinifyMiddleware",  # This one
-    "htmlmin.middleware.MarkRequestMiddleware",  # This one
+    # "django.middleware.gzip.GZipMiddleware",  # This one
+    # "htmlmin.middleware.HtmlMinifyMiddleware",  # This one
+    # "htmlmin.middleware.MarkRequestMiddleware",  # This one
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -97,6 +98,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # ? used apps for creating a better website:
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "mysite.urls"
@@ -168,14 +170,14 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
-
+"""
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     # Add this
     "compressor.finders.CompressorFinder",
 )
-
+"""
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 AUTHENTICATION_BACKENDS = ["accounts.backends.EmailBackend"]

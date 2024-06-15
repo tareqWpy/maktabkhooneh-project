@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.conf import settings
-from django.conf.urls import handler404
+from django.conf.urls import handler400, handler403, handler404, handler500
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
@@ -50,4 +50,7 @@ urlpatterns = [
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler400 = "blogApp.views.error_400"
 handler404 = "blogApp.views.error_404"
+handler403 = "blogApp.views.error_403"
+handler500 = "blogApp.views.error_500"
