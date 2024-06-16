@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ["*"]
 
 
 # ? site framework
-SITE_ID = 6
+SITE_ID = 7
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
