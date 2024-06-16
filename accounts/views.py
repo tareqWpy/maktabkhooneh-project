@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import PasswordResetView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
@@ -128,14 +129,18 @@ def activate(request, uidb64, token):
         return HttpResponse("Activation link is invalid!")
 
 
-from django.contrib import messages
-from django.contrib.auth import views as auth_views
-
-
 class CustomPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     template_name = "accounts/password_reset_confirm.html"
     success_url = "/accounts/password_reset_complete/"
 
     def form_valid(self, form):
         messages.success(self.request, "Password reset successful! 🎉")
+        return super().form_valid(form)
+
+
+class CustomPasswordResetView(PasswordResetView):
+    def form_valid(self, form):
+        messages.success(
+            self.request, "Password reset email has been sent. Please check your inbox."
+        )
         return super().form_valid(form)
