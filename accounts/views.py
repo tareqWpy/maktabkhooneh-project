@@ -1,30 +1,21 @@
-from datetime import datetime, timedelta
-
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.views import PasswordResetConfirmView, PasswordResetView
+from django.contrib.auth.views import PasswordResetView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
-from django.http import Http404, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
-from django.utils import timezone
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.utils.timesince import timesince
-from django.views.generic.edit import FormView
 
 from accounts.forms import RegisterForm
 from accounts.models import CustomUser
-
-from .forms import RegisterForm
-from .tokens import account_activation_token
+from accounts.tokens import account_activation_token
 
 
 def login_view(request):
@@ -141,13 +132,36 @@ class CustomPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     success_url = "/accounts/password_reset_complete/"
 
     def form_valid(self, form):
+        uidb64 = self.kwargs["uidb64"]
+        token = self.kwargs["token"]
+        user = self.get_user(uidb64)
+
+        new_password = form.cleaned_data["new_password1"]
+
+        if user.check_password(new_password):
+            messages.error(
+                self.request, "New password cannot be the same as the old password! 🚫"
+            )
+            return self.form_invalid(form)
+
+        user.set_password(new_password)
+        user.save()
+
         messages.success(self.request, "Password reset successful! 🎉")
         return super().form_valid(form)
 
 
 class CustomPasswordResetView(PasswordResetView):
     def form_valid(self, form):
-        messages.success(
-            self.request, "Password reset email has been sent. Please check your inbox."
-        )
+        email = form.cleaned_data.get("email")
+
+        if CustomUser.objects.filter(email=email).exists():
+            messages.success(
+                self.request,
+                "Password reset email has been sent. Please check your inbox. 💌",
+            )
+        else:
+            messages.error(self.request, "User with this email does not exist! 🚫")
+            return redirect(reverse_lazy("accounts:password_reset"))
+
         return super().form_valid(form)
