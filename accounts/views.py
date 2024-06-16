@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.sites.shortcuts import get_current_site
@@ -14,6 +15,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from accounts.forms import RegisterForm
 from accounts.models import CustomUser
 
+from .forms import RegisterForm
 from .tokens import account_activation_token
 
 
@@ -58,13 +60,6 @@ def logout_view(request):
         "You logged out successfully!",
     )
     return redirect("/")
-
-
-# Import necessary modules
-from django.contrib import messages
-from django.shortcuts import redirect, render
-
-from .forms import RegisterForm
 
 
 def signup_view(request):
@@ -131,3 +126,16 @@ def activate(request, uidb64, token):
         return response
     else:
         return HttpResponse("Activation link is invalid!")
+
+
+from django.contrib import messages
+from django.contrib.auth import views as auth_views
+
+
+class CustomPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = "accounts/password_reset_confirm.html"
+    success_url = "/accounts/password_reset_complete/"
+
+    def form_valid(self, form):
+        messages.success(self.request, "Password reset successful! 🎉")
+        return super().form_valid(form)

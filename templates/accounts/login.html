@@ -45,16 +45,16 @@
                     <span class="focus-input100"></span>
                 </div>
                 <div class="flex-sb-m w-full p-t-3 p-b-24">
-                    <div class="contact100-form-checkbox">
+                    <div class="contact100-form-checkbox w-full">
                         <div
-                        class="contact100-form-checkbox" >
-                        <a style="width: 100%; text-align: center"
+                        class="contact100-form-checkbox d-flex justify-content-between w-full" >
+                        <a style="text-align: left"
                             href="{% url 'accounts:signup' %}"
                         >not registered yet?</a>
-                    </div>
-                    </div>
-                    <div>
-
+                        <a style="text-align: right;"
+                            href="{% url 'accounts:password_reset' %}"
+                        >forgot password</a>
+                        </div>
                     </div>
                 </div>
                 <div class="container-login100-form-btn m-t-17">

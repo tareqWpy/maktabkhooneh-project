@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
 from projectApp.forms import ContactForm, NewsletterForm

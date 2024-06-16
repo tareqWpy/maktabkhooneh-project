@@ -1,4 +1,7 @@
-from django.urls import path
+from django.contrib.auth import views as auth_views
+from django.urls import path, reverse_lazy
+
+from accounts.views import CustomPasswordResetConfirmView
 
 from .views import *
 
@@ -12,5 +15,33 @@ urlpatterns = [
         "activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/",
         activate,
         name="activate",
+    ),
+    path(
+        "password_reset/",
+        auth_views.PasswordResetView.as_view(
+            template_name="accounts/password_reset_form.html",
+            email_template_name="accounts/password_reset_email.html",
+            success_url=reverse_lazy("accounts:password_reset_done"),
+        ),
+        name="password_reset",
+    ),
+    path(
+        "password_reset_done/",
+        auth_views.PasswordResetDoneView.as_view(
+            template_name="accounts/password_reset_done.html"
+        ),
+        name="password_reset_done",
+    ),
+    path(
+        "password_reset_confirm/<uidb64>/<token>/",
+        CustomPasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
+    path(
+        "password_reset_complete/",
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name="accounts/password_reset_complete.html"
+        ),
+        name="password_reset_complete",
     ),
 ]
