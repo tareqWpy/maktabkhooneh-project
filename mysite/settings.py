@@ -190,3 +190,5 @@ EMAIL_POST = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "animeartificialintelligence03@gmail.com"
 EMAIL_HOST_PASSWORD = "xywuynudbaxvqelh"
+
+PASSWORD_RESET_TIMEOUT = 3600

@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 <section class="banner-area relative blog-home-banner" id="home">
 </section>
-<div class="limiter">
+<div class="limiter" id="scrollTarget">
     <div class="container-login100">
         <div class="wrap-login100 p-b-90">
             <form
@@ -87,14 +87,17 @@
                 </div>
             </form>
             <br/>
-            {% comment %} <p>your password must be:</p>
-            <small>more than 8 charecters</small><br/>
-            <small>at least contain 1 upper and lower case letter</small><br/>
-            <small>contain @</small><br/> {% endcomment %}
-        </div>
-        
+        </div>      
     </div>
 </div>
 <div id="dropDownSelect1"></div>
+<script>
+    window.onload = function () {
+        // Select the element you want to scroll to
+        const element = document.getElementById("scrollTarget");
 
+        // Scroll to that element
+        element.scrollIntoView({ behavior: "smooth" });
+    };
+</script>
 {% endblock %}

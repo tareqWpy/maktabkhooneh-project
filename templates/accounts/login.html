@@ -3,7 +3,7 @@
     <section class="banner-area relative blog-home-banner"  id="home">
     </section>
 </div>
-<div class="limiter">
+<div class="limiter" id="scrollTarget">
     <div class="container-login100">
         <div class="wrap-login100 p-b-90">
             <form
@@ -65,4 +65,13 @@
     </div>
 </div>
 <div id="dropDownSelect1"></div>
+<script>
+    window.onload = function () {
+        // Select the element you want to scroll to
+        const element = document.getElementById("scrollTarget");
+
+        // Scroll to that element
+        element.scrollIntoView({ behavior: "smooth" });
+    };
+</script>
 {% endblock %}

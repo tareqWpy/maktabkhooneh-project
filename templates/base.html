@@ -95,8 +95,63 @@
     <link rel="stylesheet" href="{% static 'css/animate.min.css'%}" />
     <link rel="stylesheet" href="{% static 'css/owl.carousel.css'%}" />
     <link rel="stylesheet" href="{% static 'css/main.css'%}" />
+    <style>
+        #modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(225, 235, 255, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s; /* Smooth transition effect */
+            opacity: 1; /* Initially visible */
+             /* Enable interaction when visible */
+            user-select:none;
+        }
+
+        /* Style for the content inside the modal */
+        #modal-content {
+            padding: 20px;
+            background-color: #ebebebb3;
+            border-radius: 10px;
+        }
+        /* HTML:  */
+        .loader {
+          width: 65px;
+          height: 30px;
+          position: relative;
+        }
+        .loader:before {
+          content: "";
+          position: absolute;
+          border-radius: 50px;
+          box-shadow: 0 0 0 3px inset #333;
+          animation: l3 0.75s infinite alternate;
+        }
+        @keyframes l3 {
+          0% {
+            inset: 0 35px 0 0;
+          }
+          50% {
+            inset: 0 0 0 0;
+          }
+          100% {
+            inset: 0 0 0 35px;
+          }
+        }
+    </style>
     </head>
     <body>
+      <div id="modal">
+        <div id="modal-content">
+            <div class="loader"></div>
+        </div>
+    </div>
     <header id="header" >
       <div class="header-top">
         <div class="container">
@@ -244,6 +299,21 @@
       </div>
     </footer>
     <!-- End footer Area -->
+     <script>
+        // Wait for the DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById('modal');
+
+            // Set a brief timeout to allow for a smooth transition
+            setTimeout(function() {
+                modal.style.opacity = '0';
+                modal.style.pointerEvents = 'none'; // Disable interaction after transition
+            }, 1000); // Adjust the timeout value to control transition duration
+
+            // Enable pointer events on the modal to prevent interactions with elements behind it
+            modal.style.pointerEvents = 'auto';
+        });
+    </script>
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const popupMessage = document.getElementById('popup-message');
