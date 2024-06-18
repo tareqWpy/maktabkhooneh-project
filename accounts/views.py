@@ -129,7 +129,7 @@ def activate(request, uidb64, token):
 
 class CustomPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     template_name = "accounts/password_reset_confirm.html"
-    success_url = "/accounts/password_reset_complete/"
+    success_url = "/accounts/login"
 
     def form_valid(self, form):
         uidb64 = self.kwargs["uidb64"]

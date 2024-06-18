@@ -15,7 +15,7 @@ from pathlib import Path
 
 # ! for the MAINTANANCE_MODE
 
-MAINTANANCE_MODE = int(os.environ.get("MAINTANANCE_MODE", 1))
+MAINTANANCE_MODE = int(os.environ.get("MAINTANANCE_MODE", 0))
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
