@@ -96,9 +96,9 @@
                 </div>
                 <div class="container-login100-form-btn m-t-17">
                     
-                    <div class="contact100-form-checkbox" style="display:flex; justify-content:space-between; height:33px; position:absolute; bottom: 95px; right: 70px">
+                    <div class="contact100-form-checkbox" style="display:flex; justify-content:space-between; height:33px; position:absolute; bottom: 95px; right: 70px; overflow:hidden">
                         <div
-                            class="alert-msg" style="width:100% ;border:1px solid black; border-radius:2px;"
+                            class="alert-msg" style="width:100% ;border:1px solid black; border-radius:2px; overflow:hidden"
                             name="remember-me"
                         >{{form.captcha}}</div>
                     </div>
@@ -120,8 +120,15 @@
         // Select the element you want to scroll to
         const element = document.getElementById("scrollTarget");
 
-        // Scroll to that element
-        element.scrollIntoView({ behavior: "smooth" });
+        // Determine the scroll position
+        const offset = 0.23 * window.innerHeight; // 20% of the viewport height
+
+        // Scroll to that position
+        window.scrollBy({
+            top: offset,
+            behavior: "smooth"
+        });
     };
 </script>
+
 {% endblock %}
