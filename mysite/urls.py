@@ -20,8 +20,9 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
-from django.urls import include, path
+from django.urls import include, path, re_path
 
+from accounts.views import maintenance
 from blogApp.sitemaps import BlogSitemap
 from projectApp.sitemaps import StaticViewSitemap
 
@@ -45,6 +46,8 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path("summernote/", include("django_summernote.urls")),
     path("captcha/", include("captcha.urls")),
+    # ! for the MAINTANANCE_MODE
+    path("maintenance/", maintenance, name="maintenance"),
 ]
 
 

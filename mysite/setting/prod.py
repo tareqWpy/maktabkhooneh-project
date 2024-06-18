@@ -7,10 +7,29 @@ from mysite.settings import *
 SECRET_KEY = "django-insecure-6wd1ilp$u+0=9q7ndw_azwtl_5s1(0cqfzhsw-szr-oc!u8ycj"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+
+""" Before starting compressing, install:
+
+    $sudo apt-get install Memcached
+    $sudo service memcached start
+    
+    then:
+    
+    pip install python-memcached
+    pip install django-compressor
+    pip install django-htmlmin
+    
+    
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
+        "LOCATION": "127.0.0.1:11211",
+    }
+}
+
 
 """
-COMPRESS_ENABLED = not DEBUG
 
 COMPRESS_CSS_HASHING_METHOD = "content"
 COMPRESS_FILTERS = {
@@ -24,14 +43,18 @@ COMPRESS_FILTERS = {
 }
 HTML_MINIFY = True
 KEEP_COMMENTS_ON_MINIFYING = True
-"""
+
+DEBUG = True
+
+COMPRESS_ENABLED = True
+
 
 # ALLOWED_HOSTS = ["djangotech.online", "www.djangotech.online"]
 ALLOWED_HOSTS = ["*"]
 
 
 # ? site framework
-SITE_ID = 7
+SITE_ID = 8
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

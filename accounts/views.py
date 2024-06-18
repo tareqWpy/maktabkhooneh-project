@@ -165,3 +165,8 @@ class CustomPasswordResetView(PasswordResetView):
             return redirect(reverse_lazy("accounts:password_reset"))
 
         return super().form_valid(form)
+
+
+# ! for the MAINTANANCE_MODE
+def maintenance(request):
+    return render(request, "maintenance.html")

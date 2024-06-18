@@ -10,18 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+# ! for the MAINTANANCE_MODE
+
+MAINTANANCE_MODE = int(os.environ.get("MAINTANANCE_MODE", 1))
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
-#         "LOCATION": "127.0.0.1:11211",
-#     }
-# }
-# Application definition
 
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",  # ! pip install whitenoise
@@ -99,6 +97,8 @@ MIDDLEWARE = [
     # ? used apps for creating a better website:
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    # ! for the MAINTANANCE_MODE
+    "mysite.middleware.MaintenanceModeMiddleware",
 ]
 
 ROOT_URLCONF = "mysite.urls"
@@ -170,14 +170,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
-"""
-STATICFILES_FINDERS = (
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    # Add this
-    "compressor.finders.CompressorFinder",
-)
-"""
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 AUTHENTICATION_BACKENDS = ["accounts.backends.EmailBackend"]
@@ -192,3 +184,11 @@ EMAIL_HOST_USER = "animeartificialintelligence03@gmail.com"
 EMAIL_HOST_PASSWORD = "xywuynudbaxvqelh"
 
 PASSWORD_RESET_TIMEOUT = 3600
+
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    # Add this
+    "compressor.finders.CompressorFinder",
+)
